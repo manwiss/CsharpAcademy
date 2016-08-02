@@ -12,6 +12,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            Console.ReadLine();
             var dataManager = new FullDataManager();
 
             var computername = dataManager.GetMetric("computername");
