@@ -20,9 +20,8 @@ namespace DataLayer
 
         public virtual string GetMetric(ComputerMetrics metric)
         {
-            int i = (int) metric;
             string value = "";
-            switch (i)
+            switch ((int)metric)
             {
                    
                     //Machinename

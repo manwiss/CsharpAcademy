@@ -14,17 +14,19 @@ namespace DataLayer
     {
         public override ComputerSummary GetComputerSummary()
         {
-            ComputerSummary computerSummary = new ComputerSummary();
-            computerSummary.Name = GetMetric(ComputerMetrics.ComputerName);
-            computerSummary.User= GetMetric(ComputerMetrics.User);
-            computerSummary.Cpu= GetMetric(ComputerMetrics.CpuName);
-            computerSummary.Ram= Convert.ToInt32(GetMetric(ComputerMetrics.Ram));
-            computerSummary.VideoCard= GetMetric(ComputerMetrics.VideoCard);
-            computerSummary.Ip= System.Net.IPAddress.Parse(GetMetric(ComputerMetrics.Ip));
-            computerSummary.CpuUsage= Convert.ToInt32(GetMetric(ComputerMetrics.CpuUsage));
-            computerSummary.RamUsage= Convert.ToInt32(GetMetric(ComputerMetrics.RamUsage));
-            computerSummary.AvailableDiskSpaceGb= Convert.ToInt32(GetMetric(ComputerMetrics.AvailableDiskSpace));
-            computerSummary.AverageDiskQueueLength= Convert.ToInt32(GetMetric(ComputerMetrics.AverageDiskQueueLength));
+            var computerSummary = new ComputerSummary
+            {
+                Name = GetMetric(ComputerMetrics.ComputerName),
+                User = GetMetric(ComputerMetrics.User),
+                Cpu = GetMetric(ComputerMetrics.CpuName),
+                Ram = Convert.ToInt32(GetMetric(ComputerMetrics.Ram)),
+                VideoCard = GetMetric(ComputerMetrics.VideoCard),
+                Ip = System.Net.IPAddress.Parse(GetMetric(ComputerMetrics.Ip)),
+                CpuUsage = Convert.ToInt32(GetMetric(ComputerMetrics.CpuUsage)),
+                RamUsage = Convert.ToInt32(GetMetric(ComputerMetrics.RamUsage)),
+                AvailableDiskSpaceGb = Convert.ToInt32(GetMetric(ComputerMetrics.AvailableDiskSpace)),
+                AverageDiskQueueLength = Convert.ToInt32(GetMetric(ComputerMetrics.AverageDiskQueueLength))
+            };
 
 
             return computerSummary;
