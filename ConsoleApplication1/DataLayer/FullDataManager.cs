@@ -20,7 +20,7 @@ namespace DataLayer
             computerSummary.Cpu= GetMetric(ComputerMetrics.CpuName);
             computerSummary.Ram= Convert.ToInt32(GetMetric(ComputerMetrics.Ram));
             computerSummary.VideoCard= GetMetric(ComputerMetrics.VideoCard);
-            computerSummary.Ip= new IPAddress(Convert.ToInt64(GetMetric(ComputerMetrics.Ip)));
+            computerSummary.Ip= System.Net.IPAddress.Parse(GetMetric(ComputerMetrics.Ip));
             computerSummary.CpuUsage= Convert.ToInt32(GetMetric(ComputerMetrics.CpuUsage));
             computerSummary.RamUsage= Convert.ToInt32(GetMetric(ComputerMetrics.RamUsage));
             computerSummary.AvailableDiskSpaceGb= Convert.ToInt32(GetMetric(ComputerMetrics.AvailableDiskSpace));

@@ -112,7 +112,7 @@ namespace DataLayer
                     {
                         double free = Double.Parse(queryObj["FreePhysicalMemory"].ToString());
                         double total = Double.Parse(queryObj["TotalVisibleMemorySize"].ToString());
-                        value = Math.Round((total - free)/total*100, 2).ToString();
+                        value = Math.Round((total - free)/total*100, 0).ToString();
                     }
 
                     break;
