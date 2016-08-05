@@ -128,6 +128,7 @@ namespace Academy
             RAM = usageData.RamUsage;
             CPU = usageData.CpuUsage;
             AvgDiskQueueLength = usageData.AverageDiskQueueLength;
+            Time = usageData.Time.Value;
 
             //Calls the methods for every series to be updated
             RamSeries();

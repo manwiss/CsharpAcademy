@@ -1,0 +1,9 @@
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\bin\Debug\Academy.exe.config
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\bin\Debug\Academy.exe
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\bin\Debug\Academy.pdb
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.csprojResolveAssemblyReference.cache
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.Properties.Resources.resources
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.csproj.GenerateResource.Cache
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.exe
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.pdb
+c:\users\manwi\onedrive\dokumentai\visual studio 2015\Projects\Academy\Academy\obj\Debug\Academy.Form1.resources
