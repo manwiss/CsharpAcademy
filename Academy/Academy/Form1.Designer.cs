@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -36,12 +35,12 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.DisplayText = new System.Windows.Forms.Button();
-            this.ComputerName = new System.Windows.Forms.TextBox();
-            this.User = new System.Windows.Forms.TextBox();
-            this.Cpu = new System.Windows.Forms.TextBox();
-            this.Ram = new System.Windows.Forms.TextBox();
-            this.VideoCard = new System.Windows.Forms.TextBox();
-            this.Ip = new System.Windows.Forms.TextBox();
+            this.ComputerNameTextBox = new System.Windows.Forms.TextBox();
+            this.UserTextBox = new System.Windows.Forms.TextBox();
+            this.CpuTextBox = new System.Windows.Forms.TextBox();
+            this.RamTextBox = new System.Windows.Forms.TextBox();
+            this.VideoCardTextBox = new System.Windows.Forms.TextBox();
+            this.IpTextBox = new System.Windows.Forms.TextBox();
             this.ComputerLabel = new System.Windows.Forms.Label();
             this.UserLabel = new System.Windows.Forms.Label();
             this.CpuLabel = new System.Windows.Forms.Label();
@@ -51,7 +50,6 @@
             this.RamAndCpuUsageInfo = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CpuUsageText = new System.Windows.Forms.TextBox();
             this.CpuUsageLabel = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.HardDiskSpaceLabel = new System.Windows.Forms.Label();
             this.HardDiskSpaceTextBox = new System.Windows.Forms.TextBox();
             this.AvgDiskQueueLengthTextBox = new System.Windows.Forms.TextBox();
@@ -71,48 +69,48 @@
             this.DisplayText.UseVisualStyleBackColor = true;
             this.DisplayText.Click += new System.EventHandler(this.button1_Click);
             // 
-            // ComputerName
+            // ComputerNameTextBox
             // 
-            this.ComputerName.Location = new System.Drawing.Point(420, 64);
-            this.ComputerName.Name = "ComputerName";
-            this.ComputerName.Size = new System.Drawing.Size(236, 22);
-            this.ComputerName.TabIndex = 1;
-            this.ComputerName.TextChanged += new System.EventHandler(this.ComputerName_TextChanged);
+            this.ComputerNameTextBox.Location = new System.Drawing.Point(420, 64);
+            this.ComputerNameTextBox.Name = "ComputerNameTextBox";
+            this.ComputerNameTextBox.Size = new System.Drawing.Size(236, 22);
+            this.ComputerNameTextBox.TabIndex = 1;
+            this.ComputerNameTextBox.TextChanged += new System.EventHandler(this.ComputerName_TextChanged);
             // 
-            // User
+            // UserTextBox
             // 
-            this.User.Location = new System.Drawing.Point(420, 109);
-            this.User.Name = "User";
-            this.User.Size = new System.Drawing.Size(236, 22);
-            this.User.TabIndex = 2;
+            this.UserTextBox.Location = new System.Drawing.Point(420, 109);
+            this.UserTextBox.Name = "UserTextBox";
+            this.UserTextBox.Size = new System.Drawing.Size(236, 22);
+            this.UserTextBox.TabIndex = 2;
             // 
-            // Cpu
+            // CpuTextBox
             // 
-            this.Cpu.Location = new System.Drawing.Point(420, 155);
-            this.Cpu.Name = "Cpu";
-            this.Cpu.Size = new System.Drawing.Size(236, 22);
-            this.Cpu.TabIndex = 3;
+            this.CpuTextBox.Location = new System.Drawing.Point(420, 155);
+            this.CpuTextBox.Name = "CpuTextBox";
+            this.CpuTextBox.Size = new System.Drawing.Size(236, 22);
+            this.CpuTextBox.TabIndex = 3;
             // 
-            // Ram
+            // RamTextBox
             // 
-            this.Ram.Location = new System.Drawing.Point(420, 284);
-            this.Ram.Name = "Ram";
-            this.Ram.Size = new System.Drawing.Size(236, 22);
-            this.Ram.TabIndex = 4;
+            this.RamTextBox.Location = new System.Drawing.Point(420, 284);
+            this.RamTextBox.Name = "RamTextBox";
+            this.RamTextBox.Size = new System.Drawing.Size(236, 22);
+            this.RamTextBox.TabIndex = 4;
             // 
-            // VideoCard
+            // VideoCardTextBox
             // 
-            this.VideoCard.Location = new System.Drawing.Point(420, 198);
-            this.VideoCard.Name = "VideoCard";
-            this.VideoCard.Size = new System.Drawing.Size(236, 22);
-            this.VideoCard.TabIndex = 5;
+            this.VideoCardTextBox.Location = new System.Drawing.Point(420, 198);
+            this.VideoCardTextBox.Name = "VideoCardTextBox";
+            this.VideoCardTextBox.Size = new System.Drawing.Size(236, 22);
+            this.VideoCardTextBox.TabIndex = 5;
             // 
-            // Ip
+            // IpTextBox
             // 
-            this.Ip.Location = new System.Drawing.Point(420, 238);
-            this.Ip.Name = "Ip";
-            this.Ip.Size = new System.Drawing.Size(236, 22);
-            this.Ip.TabIndex = 6;
+            this.IpTextBox.Location = new System.Drawing.Point(420, 238);
+            this.IpTextBox.Name = "IpTextBox";
+            this.IpTextBox.Size = new System.Drawing.Size(236, 22);
+            this.IpTextBox.TabIndex = 6;
             // 
             // ComputerLabel
             // 
@@ -187,7 +185,7 @@
             // 
             // CpuUsageText
             // 
-            this.CpuUsageText.Location = new System.Drawing.Point(420, 333);
+            this.CpuUsageText.Location = new System.Drawing.Point(420, 332);
             this.CpuUsageText.Name = "CpuUsageText";
             this.CpuUsageText.Size = new System.Drawing.Size(236, 22);
             this.CpuUsageText.TabIndex = 15;
@@ -200,10 +198,6 @@
             this.CpuUsageLabel.Size = new System.Drawing.Size(74, 17);
             this.CpuUsageLabel.TabIndex = 16;
             this.CpuUsageLabel.Text = "CpuUsage";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // HardDiskSpaceLabel
             // 
@@ -272,12 +266,12 @@
             this.Controls.Add(this.CpuLabel);
             this.Controls.Add(this.UserLabel);
             this.Controls.Add(this.ComputerLabel);
-            this.Controls.Add(this.Ip);
-            this.Controls.Add(this.VideoCard);
-            this.Controls.Add(this.Ram);
-            this.Controls.Add(this.Cpu);
-            this.Controls.Add(this.User);
-            this.Controls.Add(this.ComputerName);
+            this.Controls.Add(this.IpTextBox);
+            this.Controls.Add(this.VideoCardTextBox);
+            this.Controls.Add(this.RamTextBox);
+            this.Controls.Add(this.CpuTextBox);
+            this.Controls.Add(this.UserTextBox);
+            this.Controls.Add(this.ComputerNameTextBox);
             this.Controls.Add(this.DisplayText);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -291,12 +285,12 @@
         #endregion
 
         private System.Windows.Forms.Button DisplayText;
-        private System.Windows.Forms.TextBox ComputerName;
-        private System.Windows.Forms.TextBox User;
-        private System.Windows.Forms.TextBox Cpu;
-        private System.Windows.Forms.TextBox Ram;
-        private System.Windows.Forms.TextBox VideoCard;
-        private System.Windows.Forms.TextBox Ip;
+        private System.Windows.Forms.TextBox ComputerNameTextBox;
+        private System.Windows.Forms.TextBox UserTextBox;
+        private System.Windows.Forms.TextBox CpuTextBox;
+        private System.Windows.Forms.TextBox RamTextBox;
+        private System.Windows.Forms.TextBox VideoCardTextBox;
+        private System.Windows.Forms.TextBox IpTextBox;
         private System.Windows.Forms.Label ComputerLabel;
         private System.Windows.Forms.Label UserLabel;
         private System.Windows.Forms.Label CpuLabel;
@@ -306,7 +300,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart RamAndCpuUsageInfo;
         private System.Windows.Forms.TextBox CpuUsageText;
         private System.Windows.Forms.Label CpuUsageLabel;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label HardDiskSpaceLabel;
         private System.Windows.Forms.TextBox HardDiskSpaceTextBox;
         private System.Windows.Forms.TextBox AvgDiskQueueLengthTextBox;

@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using DataLayer;
+using Entity;
+using DataWriter;
 
 namespace Academy
 {
     public partial class Form1 : Form
     {
-        private FullDataManager manager;
-        private ComputerSummary summary;
-        private int timer = 0;
+        //remove poll and save to database from winforms
+        //Winforms just read from database
+        //Logika iškelta kitur
+        private ComputerDetail computerDetail;
         private int CPU = 0;
         private int RAM = 0;
         private int HdSpace = 0;
-        private DateTime time;
-        
+        private int AvgDiskQueueLength = 0;
+        private DateTime Time;
+        private DataUpdater updater;
+
 
 
 
@@ -29,24 +29,25 @@ namespace Academy
         public Form1()
         {
             InitializeComponent();
-           
+
+            
+            updater=new DataUpdater();
 
 
-            time = new DateTime();
-            timer1.Interval = 1000;
+
+            //Cleaning the chart and preparing chat series for CpuUsage,RamUsge, HdSpaceAvaiable, and AverageDiskQueueLength
             RamAndCpuUsageInfo.Series.Clear();
             HdSpaceChart.Series.Clear();
             HdSpaceChart.ChartAreas[0].AxisX.LabelStyle.Format = "hh:mm:ss";
             RamAndCpuUsageInfo.ChartAreas[0].AxisX.LabelStyle.Format = "hh:mm:ss";
             RamAndCpuUsageInfo.ChartAreas[0].AxisY.Maximum = 100;
 
-
             var CpuSeries = new Series();
             CpuSeries.ChartType = SeriesChartType.Line;
             CpuSeries.BorderWidth = 3;
             CpuSeries.Color = Color.Blue;
-            CpuSeries.Name = "Cpu Usage";
-            
+            CpuSeries.Name = "Cpu Usage %";
+
             RamAndCpuUsageInfo.Series.Add(CpuSeries);
 
             CpuSeries.XValueType = ChartValueType.DateTime;
@@ -55,102 +56,166 @@ namespace Academy
             RamSeries.ChartType = SeriesChartType.Line;
             RamSeries.BorderWidth = 3;
             RamSeries.Color = Color.Coral;
-            RamSeries.Name = "Ram Usage";
+            RamSeries.Name = "Ram Usage %";
             RamAndCpuUsageInfo.Series.Add(RamSeries);
 
             var HdSpaceSeries = new Series();
             HdSpaceSeries.ChartType = SeriesChartType.Line;
             HdSpaceSeries.BorderWidth = 3;
-            HdSpaceSeries.Color = Color.Chartreuse;
-            HdSpaceSeries.Name = "Available HD space";
+            HdSpaceSeries.Color = Color.DarkRed;
+            HdSpaceSeries.Name = "Available HD\n Space  (GB)";
             HdSpaceChart.Series.Add(HdSpaceSeries);
 
 
 
-            //chart filling logic in some other class, some events to allow the timer to spin between some i
+            var AverageDiskQueueLengthSeries = new Series();
+            AverageDiskQueueLengthSeries.ChartType = SeriesChartType.Line;
+            AverageDiskQueueLengthSeries.BorderWidth = 3;
+            AverageDiskQueueLengthSeries.Color = Color.Chartreuse;
+            AverageDiskQueueLengthSeries.Name = "DiskQueueLength";
+            RamAndCpuUsageInfo.Series.Add(AverageDiskQueueLengthSeries);
 
 
 
         }
 
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            manager =new FullDataManager();
-            summary = manager.GetComputerSummary();
-            timer1.Enabled = true;
-            ComputerName.Text = summary.Name;
-            User.Text = summary.User;
-            Cpu.Text = summary.Cpu;
-            Ram.Text = summary.RamUsage.ToString() + "%" ;
-            VideoCard.Text = summary.VideoCard;
-            Ip.Text = summary.Ip.ToString();
-            CpuUsageText.Text = summary.CpuUsage.ToString() + "%";
-            HardDiskSpaceTextBox.Text = summary.AvailableDiskSpaceGb + "GB";
-            AvgDiskQueueLengthTextBox.Text = summary.AverageDiskQueueLength.ToString();
+
+            //Uses the updater which collects the current computer data and saves it to database using entity
+            updater.UpadatStaticeComputerData();
+            computerDetail = updater.getLastUpdatedComputerDetail();
 
 
+            //Displays static data of the current computer
+            DisplayStaticData(computerDetail);
+            
 
-
-
-
-
-
-
-
+            var clock = new Clock();
+            clock.UpdateFinished += GetCurrentTime;
+            clock.UpdateFinished += DisplayDynamicData;
+            clock.Start();
 
 
 
         }
 
-        
+        //Displays static data on WinForms
+        private void DisplayStaticData(ComputerDetail computerDetail)
+        {
+            ComputerNameTextBox.Text = computerDetail.Name;
+            UserTextBox.Text = computerDetail.User;
+            VideoCardTextBox.Text = computerDetail.VideoCard;
+            IpTextBox.Text = computerDetail.Ip;
+            CpuTextBox.Text = computerDetail.Cpu;
+        }
+
+        //Displays dynmaic data on TextBoxes and Charts
+        private void DisplayDynamicData(object sender, EventArgs e)
+        {
+
+            updater.UpdateDynamicComputerData();
+            var usageData = updater.getLastUpdatedComputerDetail().UsageDataCollection.Last();
+            CpuUsageText.Text = usageData.CpuUsage.ToString();
+            RamTextBox.Text = usageData.RamUsage.ToString();
+            HardDiskSpaceTextBox.Text = usageData.AvailableDiskSpaceGb.ToString();
+            AvgDiskQueueLengthTextBox.Text = usageData.AverageDiskQueueLength.ToString();
+
+
+            HdSpace = usageData.AvailableDiskSpaceGb;
+            RAM = usageData.RamUsage;
+            CPU = usageData.CpuUsage;
+            AvgDiskQueueLength = usageData.AverageDiskQueueLength;
+
+            //Calls the methods for every series to be updated
+            RamSeries();
+            CpuSeries();
+            HdSeries();
+            DiskQueueLengthSeries();
+
+
+
+        }
+
+
+
 
         private void ComputerName_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void GetCurrentTime(object sender, EventArgs e )
         {
-            
-           
-            CPU = Convert.ToInt32(manager.GetMetric(ComputerMetrics.CpuUsage));
-            RAM = Convert.ToInt32(manager.GetMetric(ComputerMetrics.RamUsage));
-            HdSpace = Convert.ToInt32(manager.GetMetric(ComputerMetrics.AvailableDiskSpace));
-            
-            Ram.Text = Convert.ToInt32(manager.GetMetric(ComputerMetrics.RamUsage)).ToString();
+            Time = DateTime.Now.ToLocalTime();
+        }
+
+
+
+        private void RamSeries()
+        {
+
+            RamTextBox.Text = RAM.ToString();
+            RamAndCpuUsageInfo.Series[1].Points.AddXY(Time.ToString("HH:mm:ss"), RAM);
+            while (RamAndCpuUsageInfo.Series[1].Points.Count > 9)
+            {
+                RamAndCpuUsageInfo.Series[1].Points.RemoveAt(0);
+            }
+         
+
+
+
+        }
+
+        private void CpuSeries()
+        {
+
             CpuUsageText.Text = CPU.ToString();
-
-            HdSpaceChart.Series[0].Points.AddXY(DateTime.Now.ToString("hh:mm:ss"), HdSpace);
-            RamAndCpuUsageInfo.Series[0].Points.AddXY( DateTime.Now.ToString("hh:mm:ss"), CPU);
-            RamAndCpuUsageInfo.Series[1].Points.AddXY(DateTime.Now.ToString("hh:mm:ss"), RAM);
-
-            while (RamAndCpuUsageInfo.Series[0].Points.Count > 8)
+            RamAndCpuUsageInfo.Series[0].Points.AddXY(Time.ToString("HH:mm:ss"), CPU);
+            while (RamAndCpuUsageInfo.Series[0].Points.Count > 9)
             {
                 RamAndCpuUsageInfo.Series[0].Points.RemoveAt(0);
             }
 
-            while (RamAndCpuUsageInfo.Series[1].Points.Count > 8)
-            {
-                RamAndCpuUsageInfo.Series[1].Points.RemoveAt(0);
-            }
 
-            while (HdSpaceChart.Series[0].Points.Count > 8)
+        }
+        private void HdSeries()
+        {
+            HardDiskSpaceTextBox.Text = HdSpace.ToString();
+
+            HdSpaceChart.Series[0].Points.AddXY(Time.ToString("HH:mm:ss"), HdSpace);
+            while (HdSpaceChart.Series[0].Points.Count > 9)
             {
                 HdSpaceChart.Series[0].Points.RemoveAt(0);
             }
 
 
-            //bla bla bla 
+        }
 
+        private void DiskQueueLengthSeries()
 
+        {
+
+            RamAndCpuUsageInfo.Series[2].Points.AddXY(Time.ToString("HH:mm:ss"), AvgDiskQueueLength);
+            AvgDiskQueueLengthTextBox.Text = AvgDiskQueueLength.ToString();
+            while (RamAndCpuUsageInfo.Series[2].Points.Count > 9)
+            {
+                RamAndCpuUsageInfo.Series[2].Points.RemoveAt(0);
+            }
 
         }
+
+
+
 
         private void RamAndCpuUsageInfo_Click(object sender, EventArgs e)
         {
 
+
         }
+
+
     }
 }
