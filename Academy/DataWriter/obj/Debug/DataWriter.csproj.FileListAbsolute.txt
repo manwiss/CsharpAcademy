@@ -49,5 +49,3 @@ C:\Academy\AcademyProject\Academy\DataWriter\bin\Debug\System.Interactive.Async.
 C:\Academy\AcademyProject\Academy\DataWriter\obj\Debug\DataWriter.csprojResolveAssemblyReference.cache
 C:\Academy\AcademyProject\Academy\DataWriter\obj\Debug\DataWriter.dll
 C:\Academy\AcademyProject\Academy\DataWriter\obj\Debug\DataWriter.pdb
-C:\Academy\AcademyProject\Academy\DataWriter\bin\Debug\WinFormsProject.exe
-C:\Academy\AcademyProject\Academy\DataWriter\bin\Debug\WinFormsProject.pdb
